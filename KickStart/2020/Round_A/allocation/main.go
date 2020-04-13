@@ -2,28 +2,35 @@ package main
 
 import (
 	"fmt"
-	"sort"
 )
 
 func main() {
 	var N int
 	fmt.Scan(&N)
-	for i := 0; i < N; i++ {
+	for i := 1; i <= N; i++ {
 		var house, budget int
 		fmt.Scan(&house, &budget)
-		prices := make([]int, house)
-		for j := 0; j < house; j++ {
-			fmt.Scan(&prices[j])
+		prices := make([]int, 1000)
+		for j, val := 0, 0; j < house; j++ {
+			fmt.Scan(&val)
+			prices[val-1]++
 		}
 
-		sort.Ints(prices)
-		j := 0
-		for ; j < house; j++ {
-			if prices[j] > budget {
+		count := 0
+		for j := 0; j < 1000; j++ {
+			if prices[j] == 0 {
+				continue
+			}
+			cost := prices[j] * (j + 1)
+			if budget >= cost {
+				budget -= cost
+				count += prices[j]
+			} else {
+				c := budget / (j + 1)
+				count += c
 				break
 			}
-			budget -= prices[j]
 		}
-		fmt.Printf("Case #%d: %d\n", (i + 1), j)
+		fmt.Printf("Case #%d: %d\n", i, count)
 	}
 }
