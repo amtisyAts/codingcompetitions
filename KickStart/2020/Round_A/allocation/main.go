@@ -1,18 +1,21 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
+	"os"
 )
 
 func main() {
 	var N int
-	fmt.Scan(&N)
+	in := bufio.NewReader(os.Stdin)
+	fmt.Fscan(in, &N)
 	for i := 1; i <= N; i++ {
 		var house, budget int
-		fmt.Scan(&house, &budget)
+		fmt.Fscan(in, &house, &budget)
 		prices := make([]int, 1000)
 		for j, val := 0, 0; j < house; j++ {
-			fmt.Scan(&val)
+			fmt.Fscan(in, &val)
 			prices[val-1]++
 		}
 
