@@ -28,6 +28,7 @@ func main() {
 		for p := 0; p < P; p++ {
 			plate := heap.Pop(h).([3]int)
 			beauty += plate[0]
+			fmt.Println(plate)
 			n, k := plate[1], plate[2]
 			if k != (K - 1) {
 				heap.Push(h, [3]int{plates[n][k+1], n, k + 1})
@@ -44,12 +45,14 @@ func (h PlateHeap) Len() int           { return len(h) }
 func (h PlateHeap) Less(i, j int) bool { return h[i][0] > h[j][0] }
 func (h PlateHeap) Swap(i, j int)      { h[i], h[j] = h[j], h[i] }
 
+// Push adds a new data to heap
 func (h *PlateHeap) Push(x interface{}) {
 	// Push and Pop use pointer receivers because they modify the slice's length,
 	// not just its contents.
 	*h = append(*h, x.([3]int))
 }
 
+// Pop removes the maximum element from heap
 func (h *PlateHeap) Pop() interface{} {
 	old := *h
 	n := len(old)
@@ -57,15 +60,3 @@ func (h *PlateHeap) Pop() interface{} {
 	*h = old[0 : n-1]
 	return x
 }
-
-// // This example inserts several ints into an IntHeap, checks the minimum,
-// // and removes them in order of priority.
-// func main() {
-// 	h := &PlateHeap{2, 1, 5}
-// 	heap.Init(h)
-// 	heap.Push(h, 3)
-// 	fmt.Printf("minimum: %d\n", (*h)[0])
-// 	for h.Len() > 0 {
-// 		fmt.Printf("%d ", heap.Pop(h))
-// 	}
-// }
