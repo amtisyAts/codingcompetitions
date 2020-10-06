@@ -24,7 +24,7 @@ func main() {
 				count++
 			}
 		}
-
+		fmt.Println("")
 		fmt.Printf("Case #%d: %d\n", i, count)
 	}
 }
